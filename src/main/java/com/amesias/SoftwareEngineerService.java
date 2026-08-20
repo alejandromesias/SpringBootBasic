@@ -1,5 +1,6 @@
 package com.amesias;
 
+import com.amesias.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +19,10 @@ public class SoftwareEngineerService {
 
     public void insert(SoftwareEngineer softwareEngineer) {
         softwareEngineerRepository.save(softwareEngineer);
+    }
+
+    public SoftwareEngineer findSoftwareEngineer(int id) {
+        return softwareEngineerRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("id " + id + " Not Found"));
     }
 }
